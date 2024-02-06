@@ -27,7 +27,7 @@ def orden_peso():
     global categoria
 
     # ordenar por peso
-    lista_archivo = sorted(lista_archivo, key=lambda x: x.split(', ')[1])
+    lista_archivo = sorted(lista_archivo, key=lambda x: int(x.split(', ')[1]))
 
     print(lista_archivo)
 
@@ -40,7 +40,7 @@ def orden_estatura():
     global categoria
 
     # ordenar por estatura
-    lista_archivo = sorted(lista_archivo, key=lambda x: x.split(', ')[2])
+    lista_archivo = sorted(lista_archivo, key=lambda x: float(x.split(', ')[2]))
 
     print(lista_archivo)
 
@@ -130,16 +130,18 @@ def insertar():
 
 # opcion 5: eliminar dato
 def eliminar():
+    global lista_archivo
+    
     registro_eliminar = input("Ingresa el nombre completo del registro a eliminar: ")
-
-    cargar_archivo()
 
     # borra el elemento de la lista (haciendo un filtro) y lo guarda en una nueva variable
     lista_nueva = [linea for linea in lista_archivo if registro_eliminar.casefold() != linea.split(', ')[0].casefold()]
-
-    with open("dataset.txt", "w") as archivo:
-        archivo.writelines(lista_nueva)
-
+    
+    lista_archivo = lista_nueva
+    
+    print()
+    print("LISTA NUEVA")
+    print(lista_nueva)
     print() 
 
 # carga los datos antes de entrar al menu
